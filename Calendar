@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int getFirstDayYear(int year) {
+    int day = (year * 365 + ((year - 1) / 4) - ((year - 1) / 100) + ((year - 1) / 400)) % 7;
+    return day;
+}
+
+int main() {
+    string month[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+
+    int year;
+    cout << "Enter Your Year: ";
+    cin >> year;
+    int February;
+
+    cout << "\nWelcome To " << year << "\n";
+
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+        February = 29;
+    } else {
+        February = 28;
+    }
+
+    int daysInMonth[] = {31, February, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    int weekDay = 0, spaceCounter = 0;
+
+    weekDay = getFirstDayYear(year);
+
+    for (int i = 0; i < 12; i++) {
+        cout << "\n\n-------------------------------------------\n";
+        cout << "                " << month[i] << "\n";
+        cout << "\n   Sun   Mon   Tue   Wed   Thu   Fri   Sat\n\n";
+
+        for (spaceCounter = 1; spaceCounter <= weekDay; spaceCounter++) {
+            cout << "      ";
+        }
+
+        for (int j = 1; j <= daysInMonth[i]; j++) {
+            cout << setw(6) << j;
+            weekDay++;
+            if (weekDay > 6) {
+                weekDay = 0;
+                cout << "\n";
+            }
+        }
+    }
+}
+
+
